@@ -39,8 +39,7 @@ public class TestGradeBook {
             for(int i =0; i<studentList.size();i++)
                 System.out.println(studentList.get(i).getStudentName()+" "+studentList.get(i).getStudentNumber());
             System.out.println();
-            Semester sem = new Semester();
-            studentList=sem.sortStudents(studentList);
+            studentList=s1.sortID(studentList);
             for(int i =0; i<studentList.size();i++)
                 System.out.println(studentList.get(i).getStudentName()+" "+studentList.get(i).getStudentNumber());
         }
@@ -64,7 +63,7 @@ public class TestGradeBook {
             reply=response.charAt(0);
 
             if(reply=='S'|| reply =='s'){
-                Semester sem = new Semester();
+                //Semester sem = new Semester();
                 System.out.print("Enter the number of programming Assigment (ranging from 0-6): ");
                 int numAssigments =keyboard.nextInt();
                 s1.setNumAssignments(numAssigments);
@@ -73,10 +72,17 @@ public class TestGradeBook {
                 s1.setNumTest(numTests);
                 System.out.print("Enter the number of final exams(ranging from 0-1): ");
                 int numFinalExam =keyboard.nextInt();
+                System.out.print("Enter the weight for program assignments: ");
+                double programWeight = keyboard.nextDouble();
+                System.out.print("Enter the weight for tests: ");
+                double testWeight = keyboard.nextDouble();
+                System.out.print("Enter the weight for the final exam: ");
+                double FinalWeight = keyboard.nextDouble();
                 //Semester sem = new Semester(numAssigments,numTests,numFinalExam);
             }
 
             else if(reply =='A'|| reply=='a' ) {
+                keyboard.nextLine();
                 Student s = new Student();
                 System.out.print("Enter the student's full name: ");
                 String fullName = keyboard.nextLine();
@@ -119,6 +125,92 @@ public class TestGradeBook {
                     String grade = keyboard.nextLine();
                     studentList.get(i).setTestScoreList(grade);
                     System.out.println(studentList.get(i)); //check to see if the array was being filled
+                }
+            }
+
+            else if(reply=='F'|| reply=='f'){
+                /*Student s = new Student();
+                if(s.getFinalExamList().size()>0)
+                    System.out.println("A final exam grade has already been entered.");*/
+                studentList=s1.getStudentList();
+                System.out.print("Enter final exam grade are you entering: ");
+                int finalExam=keyboard.nextInt();
+                studentList=s1.sortStudents(studentList);
+                keyboard.nextLine();
+                for(int i=0; i<studentList.size();i++){
+                    System.out.print("Enter "+studentList.get(i).getStudentName()+"'s final exam "+finalExam+" grade: ");
+                    String grade = keyboard.nextLine();
+                    studentList.get(i).setFinalExamList(grade);
+                    System.out.println(studentList.get(i)); //check to see if the array was being filled
+                }
+            }
+
+
+            else if(reply == 'O'|| reply=='o'){
+                try{
+                    FileWriter fw = new FileWriter("grades.out");
+                    BufferedWriter out = new BufferedWriter(fw);
+                    int count =0;
+                    studentList=s1.getStudentList();
+                    keyboard.nextLine();
+                    System.out.print("How do you want to sort output by:");
+                    String answer = keyboard.nextLine();
+                    if(answer.equalsIgnoreCase("student name"))
+                        studentList=s1.sortStudents(s1.getStudentList());
+                    else if(answer.equalsIgnoreCase("student number"))
+                        studentList=s1.sortID(s1.getStudentList());
+
+                    for(int i=0; i<studentList.size();i++){
+                        out.write(studentList.get(i)+"\n");
+                        count ++;
+                    }
+                    out.close();
+                    if(count!=1){
+                        System.out.println("Saving " + count +" students...");
+                        System.out.println("Students saved successfully");
+                    }
+                    else {
+                        System.out.println("Saving " + count +" student...");
+                        System.out.println("Student saved successfully");
+                    }
+
+                }
+                catch(FileNotFoundException fnfe){
+                    System.out.println("File not found " +fnfe.toString());
+                }
+                catch(Exception e){
+                    System.out.println("An exception has occurred "+e.toString());
+                }
+            }
+
+            else if(reply == 'Q'|| reply=='q'){
+                done=true;
+                try{
+                    FileWriter fw = new FileWriter("grades.dat");
+                    BufferedWriter out = new BufferedWriter(fw);
+                    int count =0;
+                    studentList=s1.getStudentList();
+
+                    for(int i=0; i<studentList.size();i++){
+                        out.write(studentList.get(i).getStudentName()+","+studentList.get(i).getStudentNumber()+","+studentList.get(i).getAssignments()+","+studentList.get(i).getTestScoreList()+studentList.get(i).getFinalExamList()+"\n");
+                        count ++;
+                    }
+                    out.close();
+                    if(count!=1){
+                        System.out.println("Saving " + count +" students...");
+                        System.out.println("Students saved successfully");
+                    }
+                    else {
+                        System.out.println("Saving " + count +" student...");
+                        System.out.println("Student saved successfully");
+                    }
+
+                }
+                catch(FileNotFoundException fnfe){
+                    System.out.println("File not found " +fnfe.toString());
+                }
+                catch(Exception e){
+                    System.out.println("An exception has occurred "+e.toString());
                 }
             }
         }

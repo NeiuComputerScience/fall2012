@@ -15,6 +15,7 @@ public class Student {
     private String finalExamScore;
     public ArrayList<String>assignments=new ArrayList<String>();
     public ArrayList<String>testScoreList= new ArrayList<String>();
+    public String [] finalExamList = new String[1];
 
     public void setStudentNumber(String number){
         studentNumber=number;
@@ -47,12 +48,22 @@ public class Student {
         return assignments;
     }
 
+    public void setFinalExamList(String finalExamScore){
+        finalExamList[0]=finalExamScore;
+    }
+
+    public String[]getFinalExamList(){
+        return finalExamList;
+    }
+
     public String toString(){
         String ret=studentName+"\n"+"ID "+studentNumber+"\n";
         for(int i =0; i<assignments.size();i++)
             ret =ret+assignments.get(i)+" Assignment# "+i+"\n";
         for(int i=0;i<testScoreList.size();i++)
             ret=ret+testScoreList.get(i)+" Test# "+i+"\n";
+        for(int i=0;i<finalExamList.length;i++)
+            ret = ret+finalExamList[i]+" Final Exam# "+i+"\n";
          return ret;
     }
 }

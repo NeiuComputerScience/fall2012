@@ -10,6 +10,9 @@ public class Semester {
     private int  numAssignments;
     private int numTest;
     private int numFinalExam;
+    private int programsWeight;
+    private int testsWeight;
+    private int finalWeight;
 
     ArrayList<Student>studentList= new ArrayList<Student>();
 
@@ -17,15 +20,6 @@ public class Semester {
 
     }
 
-    /*public Semester(int numAssignments,int numTest, int numFinalExam){
-        assignments = new int[numAssignments];
-        test=new int[numTest];
-        this.numFinalExam=numFinalExam;
-    }
-     public void setAssignmentGrade(int grade){
-         for(int i=0; i<assignments.length;i++)
-             assignments[i]=grade;
-     }*/
 
     public void setNumAssignments(int numAssignments){
         this.numAssignments=numAssignments;
@@ -43,6 +37,7 @@ public class Semester {
         return numTest;
     }
 
+
     public void addStudent(Student s){
         studentList.add(s);
     }
@@ -57,6 +52,21 @@ public class Semester {
             swapped=false;
             for(int i=1;i<students.size();i++)
                 if(students.get(i-1).getStudentName().compareTo(students.get(i).getStudentName())>0){
+                    Student temp=students.get(i);
+                    students.set(i,students.get(i-1));
+                    students.set(i-1,temp);
+                    swapped=true;
+                }
+        }
+        return students;
+    }
+
+    public ArrayList<Student> sortID(ArrayList<Student>students ){
+        boolean swapped=true;
+        while(swapped){
+            swapped=false;
+            for(int i=1;i<students.size();i++)
+                if(students.get(i-1).getStudentNumber().compareTo(students.get(i).getStudentNumber())>0){
                     Student temp=students.get(i);
                     students.set(i,students.get(i-1));
                     students.set(i-1,temp);
