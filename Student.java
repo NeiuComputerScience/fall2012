@@ -1,35 +1,56 @@
-/*
-*
-* Author: Troy
-* Author: Diego
-* Author: Rayed
-* Author: Chris
-*---------------
-* Used to create Student objects with names and IDs.
-*/
-public class Student{
+import java.util.ArrayList;
 
-	private String firstName;
-	private String lastName;
-	private int studentID;
-	private char studentgrade;
-	
-	public Student(String fN, String lN, int iD){
-		firstName = fN;
-		lastName = lN;
-		studentID = iD;
-	}
-	public String getFN(){
-		return(firstName);
-	}
-	public String getLN(){
-		return(lastName);
-	}
-	public int getID(){
-		return(studentID);
-	}
-	public char calculateGrade()
-	{
-	}
-	// this a test
+/**
+ * Created with IntelliJ IDEA.
+ * User: troy
+ * Date: 10/30/12
+ * Time: 9:54 AM
+ * To change this template use File | Settings | File Templates.
+ */
+public class Student {
+    private String studentNumber;
+    private String studentName;
+    //private String testScore;
+    //private String assignmentGrade;
+    private String finalExamScore;
+    public ArrayList<String>assignments=new ArrayList<String>();
+    public ArrayList<String>testScoreList= new ArrayList<String>();
+
+    public void setStudentNumber(String number){
+        studentNumber=number;
+    }
+
+    public String getStudentNumber(){
+        return studentNumber;
+    }
+
+    public void setStudentName(String studentName){
+        this.studentName=studentName;
+    }
+
+    public String getStudentName(){
+        return studentName;
+    }
+
+    public void setTestScoreList(String testGrade){
+            testScoreList.add(testGrade );
+    }
+
+    public ArrayList<String> getTestScoreList(){
+        return testScoreList;
+    }
+    public void setAssignments(String grade){
+        assignments.add(grade);
+    }
+
+    public ArrayList<String> getAssignments(){
+        return assignments;
+    }
+
+    /*public String toString(){
+        String ret="";
+        for(int i =0; i<assignments.size();i++)
+            ret =ret+assignments.get(i)+" Assignment #"+i+"\n";
+         return studentName+"\n"+studentNumber+"ID"+"\n"+ret;
+    }*/
 }
